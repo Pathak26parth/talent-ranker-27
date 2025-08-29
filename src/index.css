@@ -2,41 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* TalentRanker Design System - Professional HR Platform */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 @layer base {
   :root {
+    /* Brand Colors - Professional Blue & Purple Gradient */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 215 25% 27%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 215 25% 27%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 215 25% 27%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - Deep Professional Blue */
+    --primary: 217 91% 60%;
+    --primary-hover: 217 91% 55%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Elegant Purple */
+    --secondary: 262 83% 58%;
+    --secondary-hover: 262 83% 53%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Success - Professional Green */
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Warning - Amber */
+    --warning: 45 93% 47%;
+    --warning-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --muted: 215 16% 96%;
+    --muted-foreground: 215 16% 47%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --accent: 215 16% 96%;
+    --accent-foreground: 215 25% 27%;
 
-    --radius: 0.5rem;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 215 16% 92%;
+    --input: 215 16% 92%;
+    --ring: 217 91% 60%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(262 83% 58%));
+    --gradient-hero: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(262 83% 58%) 50%, hsl(285 85% 63%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(215 16% 98%) 100%);
+    
+    /* Shadows */
+    --shadow-primary: 0 10px 40px -10px hsl(217 91% 60% / 0.4);
+    --shadow-card: 0 4px 20px -2px hsl(215 25% 27% / 0.08);
+    --shadow-elevated: 0 25px 50px -12px hsl(215 25% 27% / 0.25);
+
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +122,129 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
+}
+
+/* Professional Components */
+@layer components {
+  .hero-button {
+    @apply bg-gradient-to-r from-primary to-secondary text-white font-semibold py-3 px-8 rounded-xl;
+    @apply hover:from-primary-hover hover:to-secondary-hover transition-all duration-300;
+    @apply shadow-primary hover:shadow-elevated transform hover:-translate-y-1;
+  }
+
+  .glass-card {
+    @apply backdrop-blur-xl bg-white/80 border border-white/20 rounded-2xl;
+    @apply shadow-card hover:shadow-elevated transition-all duration-500;
+  }
+
+  .gradient-card {
+    background: var(--gradient-card);
+    @apply border border-border/50 rounded-2xl shadow-card;
+    @apply hover:shadow-elevated transition-all duration-300 transform hover:-translate-y-1;
+  }
+
+  .status-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
+  }
+
+  .status-active {
+    @apply bg-success/10 text-success border border-success/20;
+  }
+
+  .status-pending {
+    @apply bg-warning/10 text-warning border border-warning/20;
+  }
+
+  .status-shortlisted {
+    @apply bg-secondary/10 text-secondary border border-secondary/20;
+  }
+
+  .nav-item {
+    @apply px-4 py-2 rounded-lg text-muted-foreground hover:text-foreground;
+    @apply hover:bg-accent transition-all duration-200 cursor-pointer;
+  }
+
+  .nav-item-active {
+    @apply px-4 py-2 rounded-lg text-primary bg-primary/10 border border-primary/20;
+  }
+
+  .upload-zone {
+    @apply border-2 border-dashed border-border rounded-xl p-8 text-center;
+    @apply hover:border-primary/50 hover:bg-primary/5 transition-all duration-300;
+    @apply cursor-pointer group;
+  }
+
+  .metric-card {
+    @apply gradient-card p-6 text-center space-y-2;
+  }
+
+  .metric-value {
+    @apply text-3xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+
+  .metric-label {
+    @apply text-sm text-muted-foreground font-medium;
+  }
+}
+
+/* Animations */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out forwards;
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
