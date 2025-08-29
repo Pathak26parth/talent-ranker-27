@@ -102,5 +102,12 @@ export default {
 			}
 		}
 	},
+			boxShadow: {
+				'primary': 'var(--shadow-primary)',
+				'card': 'var(--shadow-card)',
+				'elevated': 'var(--shadow-elevated)'
+			}
+		}
+	},
 	plugins: [require("tailwindcss-animate")],
 } satisfies Config;
