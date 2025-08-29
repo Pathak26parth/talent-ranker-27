@@ -151,7 +151,7 @@ const ResumeProcessing = () => {
                 className="hidden"
                 id="resume-upload"
               />
-              <label htmlFor="resume-upload" className="cursor-pointer">
+              <label htmlFor="resume-upload" className="cursor-pointer group">
                 <Upload className="w-12 h-12 text-muted-foreground mx-auto mb-4 group-hover:text-primary transition-colors" />
                 <p className="text-lg font-medium mb-2">Click to upload resumes</p>
                 <p className="text-sm text-muted-foreground">or drag and drop files here</p>
